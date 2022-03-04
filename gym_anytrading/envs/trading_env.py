@@ -133,7 +133,7 @@ class TradingEnv(gym.Env):
             _plot_position(start_position, self._start_tick)
 
         clear_output()
-        _plot_position(self._position, self._current_tick)
+        _plot_position(self._position_history[self._current_tick], self._current_tick)
 
         plt.suptitle(
             "Total Reward: %.6f" % self._total_reward + ' ~ ' +
