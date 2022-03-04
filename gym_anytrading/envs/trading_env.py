@@ -132,7 +132,7 @@ class TradingEnv(gym.Env):
             start_position = self._position_history[self._start_tick]
             _plot_position(start_position, self._start_tick)
 
-        clear_output()
+        clear_output(wait=True)
         plt.plot(self.prices)
         _plot_position(self._position_history[self._current_tick], self._current_tick)
 
@@ -142,7 +142,7 @@ class TradingEnv(gym.Env):
         )
 
         plt.show()
-        sleep(0.01)
+        #sleep(0.01)
 
     def render_all(self, mode='human'):
         window_ticks = np.arange(len(self._position_history))
