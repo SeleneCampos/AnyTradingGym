@@ -4,7 +4,8 @@ from gym.utils import seeding
 import numpy as np
 from enum import Enum
 import matplotlib.pyplot as plt
-
+from IPython.display import clear_output
+from time import sleep
 
 class Actions(Enum):
     Sell = 0
@@ -131,6 +132,7 @@ class TradingEnv(gym.Env):
             start_position = self._position_history[self._start_tick]
             _plot_position(start_position, self._start_tick)
 
+        clear_output()
         _plot_position(self._position, self._current_tick)
 
         plt.suptitle(
@@ -138,8 +140,8 @@ class TradingEnv(gym.Env):
             "Total Profit: %.6f" % self._total_profit
         )
 
-        plt.pause(0.01)
-
+        plt.show()
+        sleep(1)
 
     def render_all(self, mode='human'):
         window_ticks = np.arange(len(self._position_history))
