@@ -136,9 +136,10 @@ class TradingEnv(gym.Env):
         clear_output(wait=True)
         if self._current_tick <= 100:
             plt.plot(self.prices[:self._current_tick+1])
+            _plot_position(self._position_history[self._current_tick], np.arange(0,self._current_tick))
         else:
             plt.plot(np.arange(self._current_tick-100,self._current_tick+1), self.prices[self._current_tick-100:self._current_tick+1])
-        _plot_position(self._position_history[self._current_tick], self._current_tick)
+            _plot_position(self._position_history[self._current_tick], np.arange(self._current_tick-100,self._current_tick))
         #print(self._position_history[self._current_tick-100:self._current_tick])
         #sleep(33)
 
