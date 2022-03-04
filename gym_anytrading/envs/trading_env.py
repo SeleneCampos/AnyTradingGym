@@ -133,6 +133,7 @@ class TradingEnv(gym.Env):
             _plot_position(start_position, self._start_tick)
 
         clear_output()
+        plt.plot(self.prices)
         _plot_position(self._position_history[self._current_tick], self._current_tick)
 
         plt.suptitle(
