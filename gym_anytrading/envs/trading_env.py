@@ -115,16 +115,15 @@ class TradingEnv(gym.Env):
 
 
     def render(self, mode='human'):
-        
-        def _plot_position(end, tick, init=None):
-            for position in self._position_history[init:end]:
-                color = None
-                if position == Positions.Short:
-                    color = 'red'
-                elif position == Positions.Long:
-                    color = 'green'
-                if color:
-                    plt.scatter(tick, self.prices[tick], color=color)
+
+        def _plot_position(position, tick):
+            color = None
+            if position == Positions.Short:
+                color = 'red'
+            elif position == Positions.Long:
+                color = 'green'
+            if color:
+                plt.scatter(tick, self.prices[tick], color=color)
 
         if self._first_rendering:
             self._first_rendering = False
@@ -136,12 +135,9 @@ class TradingEnv(gym.Env):
         clear_output(wait=True)
         if self._current_tick <= 100:
             plt.plot(self.prices[:self._current_tick+1])
-            _plot_position(self._position_history[self._current_tick], np.arange(0,self._current_tick))
         else:
             plt.plot(np.arange(self._current_tick-100,self._current_tick+1), self.prices[self._current_tick-100:self._current_tick+1])
-            _plot_position(self._position_history[self._current_tick], np.arange(self._current_tick-100,self._current_tick))
-        #print(self._position_history[self._current_tick-100:self._current_tick])
-        #sleep(33)
+        _plot_position(self._position_history[self._current_tick], self._current_tick)
 
         plt.suptitle(
             "Total Reward: %.6f" % self._total_reward + ' ~ ' +
