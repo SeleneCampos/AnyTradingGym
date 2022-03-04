@@ -128,15 +128,15 @@ class TradingEnv(gym.Env):
         if self._first_rendering:
             self._first_rendering = False
             plt.cla()
-            plt.plot(self.prices[0])
+            plt.plot(self.prices[:1])
             start_position = self._position_history[self._start_tick]
             _plot_position(start_position, self._start_tick)
 
         clear_output(wait=True)
         if self._current_tick < 100:
-            plt.plot(self.prices[:self._current_tick])
+            plt.plot(self.prices[:self._current_tick+1])
         else:
-            plt.plot(self.prices[self._current_tick-100:self._current_tick])
+            plt.plot(self.prices[self._current_tick-100:self._current_tick+1])
         _plot_position(self._position_history[self._current_tick], self._current_tick)
 
         plt.suptitle(
