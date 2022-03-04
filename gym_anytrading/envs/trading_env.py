@@ -142,7 +142,7 @@ class TradingEnv(gym.Env):
         )
 
         plt.show()
-        sleep(1)
+        sleep(0.01)
 
     def render_all(self, mode='human'):
         window_ticks = np.arange(len(self._position_history))
